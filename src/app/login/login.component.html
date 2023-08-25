@@ -2,26 +2,29 @@
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
 
-    <form class="login-form data-form">
+    <form class="login-form data-form" #loginForm="ngForm">
 
       <mat-form-field>
 
-        <input matInput type="email" name="email"
-               placeholder="Email">
+        <input matInput type="email" ngModel #email="ngModel" name="email" required placeholder="Email">
 
       </mat-form-field>
 
       <mat-form-field>
 
-        <input matInput type="password" placeholder="Password">
+        <input matInput type="password" ngModel #password="ngModel" name="password" required placeholder="Password">
 
       </mat-form-field>
 
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary" (click)="Login(loginForm)">
         Login
       </button>
 
     </form>
+
+    <div class="form-val">
+      {{ email.valid }}
+    </div>
 
   </mat-card-content>
 </mat-card>
