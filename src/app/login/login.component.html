@@ -2,11 +2,12 @@
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
 
-    <form class="login-form data-form" #loginForm="ngForm">
+    <form class="login-form data-form" #loginForm="ngForm" (ngSubmit)="Login(loginForm, $event)">
 
       <mat-form-field>
 
-        <input matInput type="email" ngModel #email="ngModel" name="email" required email minlength="3" maxlength="20" placeholder="Email">
+        <input matInput type="email" ngModel #email="ngModel" name="email"
+          required email minlength="3" maxlength="20" placeholder="Email">
 
         <mat-error *ngIf="email.errors?.required">The email is madatory.</mat-error>
 
@@ -24,14 +25,14 @@
 
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="Login(loginForm)">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
         Login
       </button>
 
     </form>
 
     <div class="form-val">
-      {{ email.errors | json}}
+      {{ email.value | json}}
     </div>
 
   </mat-card-content>
