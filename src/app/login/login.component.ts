@@ -9,6 +9,10 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  val = {
+    email: 'charl@gmail.com',
+    password: '123456'
+  };
 
   constructor() {
 
@@ -21,6 +25,8 @@ export class LoginComponent implements OnInit {
 
   Login (LoginForm: NgForm, submit) {
     console.log(LoginForm.value, LoginForm.valid, submit);
+
+    console.log('value {0}' , this.val);
   }
 
 }
