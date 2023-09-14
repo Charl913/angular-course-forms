@@ -7,4 +7,18 @@
 
         <mat-error *ngIf="courseTitle.errors?.titleExists">This title is already being used.</mat-error>
     </mat-form-field>
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="releaseDatePicker" placeholder="Release date" formControlName="releaseAt">
+        <mat-datepicker-toggle [for]="releaseDatePicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #releaseDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox color="primary" formControlName="downloadsAllowed">
+        Downloads allowed?
+    </mat-checkbox>
+
+    <mat-form-field appearance="outline" formControlName="longDescription">
+        <textarea matInput placeholder="Description"></textarea>
+    </mat-form-field>
 </div>
