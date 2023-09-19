@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, forwardRef } from '@angular/core';
+import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { CoursesService } from '../../services/courses.service';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -29,7 +29,7 @@ export class CreateCourseStep1Component implements OnInit {
     releaseAt: [new Date(), Validators.required],
     category: ['BEGINNER', Validators.required],
     downloadsAllowed: [false, Validators.requiredTrue],
-    longDescription: ['', Validators.required, Validators.minLength(3)]
+    longDescription: ['', [Validators.required, Validators.minLength(3)]]
   });
 
   coursesCategories$: Observable<courseCategory[]>;
@@ -41,6 +41,18 @@ export class CreateCourseStep1Component implements OnInit {
 
   ngOnInit() {
     this.coursesCategories$ = this.courses.findCourseCategories();
+
+    const draft = localStorage.getItem('STEP_1');
+
+    if(draft) {
+      this.form.setValue(JSON.parse(draft));
+    }
+
+    this.form.valueChanges
+      .pipe(
+        filter(() => this.form.valid)
+      )
+      .subscribe(val => localStorage.setItem('STEP_1', JSON.stringify(val)));
   }
 
   get courseTitle() {
