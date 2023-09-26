@@ -1,4 +1,7 @@
-
+* {
+  display: flex;
+  flex-direction: column;
+}
 .address-error {
   color:red;
 }
